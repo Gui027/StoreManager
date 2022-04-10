@@ -2,7 +2,6 @@ const ProductsModel = require('../models/ProductModel');
 
 const getAllProducts = async () => {
     const products = await ProductsModel.getAll();
-    // console.log(products);
     return products;
 };
 
@@ -16,8 +15,6 @@ const getByIdProducts = async (id) => {
             message: 'Product not found',
         };
     }
-
-    console.log(products, id);
 
     return product;
 };
