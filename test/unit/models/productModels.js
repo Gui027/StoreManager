@@ -4,6 +4,7 @@ const sinon = require('sinon');
 
 const productsMock = require('../../mocks/productsMock');
 const ProductsModel = require('../../../models/ProductModel');
+const SalesModel = require('../../../models/SalesModel');
 const connection = require('../models/connection');
 const {
     createProduct,
@@ -139,7 +140,7 @@ describe('Models', () => {
                     })
                   });
                 });
-                
+
                 describe('Testa o arquivo deleteProduct', () => {
                   describe('Quando tenta deletar um produto', () => {
                     before(() => {
@@ -240,7 +241,7 @@ describe('Models', () => {
               
                   describe('Quando tenta buscar todas a vendas', () => {
                     it('É um array com 2 elementos', async () => {
-                      const result = await getAllSalesModel();
+                      const result = await SalesModel.getAllSalesModel();
                       expect(result).to.be.an('array');
                       expect(result.length).to.be.equals(2);
                     });
@@ -248,7 +249,7 @@ describe('Models', () => {
               
                   describe('Quando tenta buscar vendas pelo id', () => {
                     it('É um array com 1 elemento', async () => {
-                      const result = await getAllSalesModel(1);
+                      const result = await SalesModel.getAllSalesModel(1);
                       expect(result).to.be.an('array');
                       expect(result.length).to.be.equals(1);
                     });
@@ -276,6 +277,22 @@ describe('Models', () => {
                 //   });
                 // });
               });
+        });
+
+        describe('#create', () => {
+          before(() => {
+            sinon.stub(connection, 'execute').resolves([{ insertId: productsMock.inserted.id }])
+          });
+
+          after(() => {
+            connection.execute.restore();
+          })
+
+          it('deve retornar um objeto com os atributos id, name, email', async () => {
+            const { name, quantity } = productsMock.inserted;
+            const product = await ProductsModel.createProduct({ name, quantity });
+            expect(product).to.deep.eq(productsMock.inserted);
+          })
         })
     })
 });
