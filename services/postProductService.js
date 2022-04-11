@@ -20,7 +20,4 @@ const alreadyExist = async (name, quantity) => {
     return product;
 };
 
-module.exports = {
-    alreadyExist,
-    validateName,
-};
+module.exports = alreadyExist;
