@@ -8,7 +8,6 @@ const GetProductService = require('../../../services/getProductsService');
 const PostProductService = require('../../../services/postProductService');
 const PutProductService = require('../../../services/putProductsService');
 
-const ProductModel = require('../../../models/ProductModel');
 
 const { full } = require('../../mocks/productsMock');
 
@@ -19,79 +18,6 @@ const ProductsService = require('../../../services/getProductsService');
 const CreateService = require('../../../services/postProductService');
 const DeleteProducts = require('../../../services/deleteProductService');
 const DeleteProductsController = require('../../../controllers/deleteProductController');
-
-// describe('Product Controller', () => {
-//   const fakeProduct = {
-//     name: 'Produto A',
-//     quantity: 10,
-//   };
-
-//   const allProductsDb = [
-//     {
-//       id: 1,
-//       name: "Martelo de Thor",
-//       quantity: 10,
-//     },
-//     {
-//       id: 2,
-//       name: "Traje de encolhimento",
-//       quantity: 20,
-//     },
-//     {
-//       id: 3,
-//       name: "Escudo do Capitão América",
-//       quantity: 30,
-//     },
-//   ]
-
-//   const res = {};
-//   const req = {};
-
-//   before(() => {
-//     res.status = sinon.stub().returns(res);
-//     res.json = sinon.stub().returns();
-//   })
-
-//   describe('produto criado com sucesso', () => {
-//     before(() => {
-//       sinon.stub(PostProductService, 'alreadyExist').resolves(fakeProduct);
-//       req.body = fakeProduct;
-//     });
-//     after(() => {
-//         PostProductService.alreadyExist.restore();
-//       req.body = undefined;
-//     });
-
-//     it('valida criação de produto', async () => {
-//       await PostProductController.postProduct(req, res);
-
-//       expect(res.status.calledWith(201)).to.be.equals(true);
-//       expect(res.json.calledWith(fakeProduct)).to.be.equals(true);
-//     });
-//   })
-//   describe('verifica busca por todos os produtos', () => {
-//     before(() => {
-//       sinon.stub(GetProductService, 'getAllProducts').resolves(allProductsDb);
-//     })
-//     after(() => {
-//         GetProductService.getAllProducts.restore();
-//     })
-//     it('retorna todos os produtos', async () => {
-//       await GetProductController.getAll(req, res);
-
-//       expect(res.status.calledWith(201)).to.be.equal(true);
-//       expect(res.json.calledWith(allProductsDb)).to.be.equal(true);
-//     })
-//   })
-// })
-
-// const { expect } = require("chai");
-// const sinon = require('sinon');
-// const productsMock = require('../../mocks/productsMock');
-// const ProductController = require('../../../controllers/getProductController');
-// const CreateController = require('../../../controllers/postProductsController');
-// const ProductsService = require('../../../services/getProductsService');
-// const CreateService = require('../../../services/postProductService');
 
 describe('Controller', () => {
   describe('ProductController', () => {
