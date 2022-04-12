@@ -11,6 +11,7 @@ const putProductsController = require('./controllers/putProductsController');
 const deleteProductController = require('./controllers/deleteProductController');
 const postSalesController = require('./controllers/postSalesController');
 const putUpdateSales = require('./controllers/updateSalesController');
+const deleteSalesController = require('./controllers/deleteSaleController');
 
 const app = express();
 
@@ -42,6 +43,8 @@ app.post('/products', validateName, validateQuantity, postProductController);
 app.put('/sales', validateProductId, validateQuantitySales);
 
 app.put('/sales:id', validateProductId, validateQuantitySales, putUpdateSales);
+
+app.delete('/sales/:id', validateProductId, validateQuantitySales, deleteSalesController);
 
 app.listen(process.env.PORT, () => {
 console.log(`Escutando na porta ${process.env.PORT}`);
