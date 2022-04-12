@@ -1,6 +1,6 @@
 const validateProductId = (req, res, next) => {
     const sales = req.body;
-    if (!sales.some((s) => s.productId)) {
+    if (!sales.some((s) => s.product_id)) {
         return res.status(400).json({ message: '"productId" is required' });
     }
 
