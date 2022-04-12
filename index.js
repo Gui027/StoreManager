@@ -9,6 +9,7 @@ const { validateProductId, validateQuantitySales } = require('./middlewares/Sale
 const postProductController = require('./controllers/postProductsController');
 const putProductsController = require('./controllers/putProductsController');
 const deleteProductController = require('./controllers/deleteProductController');
+const postSalesController = require('./controllers/postSalesController');
 
 const app = express();
 
@@ -29,13 +30,13 @@ app.put('/products/:id', validateName, validateQuantity, putProductsController);
 
 app.delete('/products/:id', deleteProductController);
 
+app.post('/sales', validateProductId, validateQuantitySales, postSalesController);
+
 app.get('/sales', getAllS);
 
 app.get('/sales/:id', getByIdS);
 
 app.post('/products', validateName, validateQuantity, postProductController);
-
-app.post('/sales', validateProductId, validateQuantitySales);
 
 app.put('/sales', validateProductId, validateQuantitySales);
 
