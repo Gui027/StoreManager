@@ -44,7 +44,7 @@ app.put('/sales', validateProductId, validateQuantitySales);
 
 app.put('/sales/:id', validateProductId, validateQuantitySales, putUpdateSales);
 
-app.delete('/sales/:id', validateProductId, validateQuantitySales, deleteSalesController);
+app.delete('/sales/:id', deleteSalesController);
 
 app.listen(process.env.PORT, () => {
 console.log(`Escutando na porta ${process.env.PORT}`);
