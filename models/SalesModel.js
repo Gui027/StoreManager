@@ -5,7 +5,7 @@ const createSalesModel = async (sales) => {
     'INSERT INTO StoreManager.sales (date) VALUES (NOW())',
     );
     
-    const saleProducts = await sales.map(async ({ product_id: productId, quantity }) => {
+    const saleProducts = await sales.map(async ({ productId, quantity }) => {
       await connection.query(
         'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
         [sale.insertId, productId, quantity],
@@ -17,7 +17,7 @@ const createSalesModel = async (sales) => {
       
       return {
         id: sale.insertId,
-        itemSold: sales,
+        itemsSold: sales,
       };
     };
     
