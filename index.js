@@ -42,7 +42,7 @@ app.post('/products', validateName, validateQuantity, postProductController);
 
 app.put('/sales', validateProductId, validateQuantitySales);
 
-app.put('/sales:id', validateProductId, validateQuantitySales, putUpdateSales);
+app.put('/sales/:id', validateProductId, validateQuantitySales, putUpdateSales);
 
 app.delete('/sales/:id', validateProductId, validateQuantitySales, deleteSalesController);
 

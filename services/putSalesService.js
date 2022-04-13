@@ -1,7 +1,7 @@
 const { updateSalesModel } = require('../models/SalesModel');
 
 const updateSalesService = async (id, product) => {
-    const { product_id: productId, quantity } = product;
+    const { productId, quantity } = product;
     await updateSalesModel(id, productId, quantity);
 
     return {
