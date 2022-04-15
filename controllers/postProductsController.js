@@ -1,13 +1,15 @@
-const validateProductService = require('../services/validateProductService');
+const postProductService = require('../services/postProductService');
 
-const validateProduct = async (req, res) => {
-    const { id, quantity } = req.body;
+const postProduct = async (req, res) => {
+    const { name, quantity } = req.body;
 
-    const stock = await validateProductService(id, quantity);
+    const product = await postProductService(name, quantity);
 
-    if (stock.message) {
-        return res.status(stock.code).json({ message: stock.message });
+    if (product.message) {
+        return res.status(product.code).json({ message: product.message });
     }
+    
+    return res.status(201).json(product);
 };
 
-module.exports = validateProduct;
+module.exports = postProduct;
