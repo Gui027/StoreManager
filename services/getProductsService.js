@@ -1,13 +1,13 @@
-const ProductsModel = require('../models/ProductModel');
+const ProductModel = require('../models/ProductModel');
 
 const getAllProducts = async () => {
-    const products = await ProductsModel.getAll();
+    const products = await ProductModel.getAll();
     return products;
 };
 
 const getByIdProducts = async (id) => {
-    const products = await ProductsModel.getAll();
-    const product = products.find((p) => p.id === parseInt(id, 10));
+    const products = await ProductModel.getAll();
+    const product = products.find((p) => p.id === Number(id));
 
     if (!product) {
         return {
