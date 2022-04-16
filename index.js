@@ -12,7 +12,7 @@ const deleteProductController = require('./controllers/deleteProductController')
 const postSalesController = require('./controllers/postSalesController');
 const putUpdateSales = require('./controllers/updateSalesController');
 const deleteSalesController = require('./controllers/deleteSaleController');
-// const validateProduct = require('./services/validateProductService');
+const validateProduct = require('./controllers/validateProductController');
 
 const app = express();
 
@@ -33,7 +33,7 @@ app.put('/products/:id', validateName, validateQuantity, putProductsController);
 
 app.delete('/products/:id', deleteProductController);
 
-app.post('/sales', validateProductId, validateQuantitySales, postSalesController);
+app.post('/sales', validateProductId, validateQuantitySales, validateProduct, postSalesController);
 
 app.get('/sales', getAllS);
 
