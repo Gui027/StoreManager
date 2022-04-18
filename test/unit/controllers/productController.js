@@ -1,16 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const GetProductController = require('../../../controllers/getProductController');
-const PostProductController = require('../../../controllers/postProductsController');
-const PutProductController = require('../../../controllers/putProductsController');
-const GetProductService = require('../../../services/getProductsService');
-const PostProductService = require('../../../services/postProductService');
-const PutProductService = require('../../../services/putProductsService');
-
-
-const { full } = require('../../mocks/productsMock');
-
 const productsMock = require('../../mocks/productsMock');
 const ProductController = require('../../../controllers/getProductController');
 const CreateController = require('../../../controllers/postProductsController');
@@ -28,13 +18,13 @@ describe('Controller', () => {
 
                 before(() => {
                     res.status = sinon.stub().returns(res);
-                    res.json = sinon.stub();
+                    res.json = sinon.stub().returns(productsMock.empty);
 
-                    sinon.stub(ProductsService, 'getAllProducts').resolves(productsMock.empty);
+                    sinon.stub(ProductController, 'getAll').resolves(productsMock.empty);
                 });
 
                 after(() => {
-                    ProductsService.getAllProducts.restore();
+                    ProductController.getAll.restore();
                 });
 
                 it('deve chamar a função `res.status` com o valor 200', async () => {
