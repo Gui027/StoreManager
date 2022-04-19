@@ -1,4 +1,4 @@
-const postProductService = require('../services/postProductService');
+const { postProductService } = require('../services/Services');
 
 const postProduct = async (req, res) => {
     const { name, quantity } = req.body;

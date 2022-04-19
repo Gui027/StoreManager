@@ -1,4 +1,4 @@
-const postSalesService = require('../services/postSalesService');
+const { postSalesService } = require('../services/Services');
 
 const postSalesController = async (req, res) => {
     try {

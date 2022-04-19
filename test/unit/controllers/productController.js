@@ -20,11 +20,11 @@ describe('Controller', () => {
                     res.status = sinon.stub().returns(res);
                     res.json = sinon.stub().returns(productsMock.empty);
 
-                    sinon.stub(ProductController, 'getAll').resolves(productsMock.empty);
+                    sinon.stub(ProductsService, 'getAllProducts').resolves(productsMock.empty);
                 });
 
                 after(() => {
-                    ProductController.getAll.restore();
+                    ProductsService.getAllProducts.restore();
                 });
 
                 it('deve chamar a função `res.status` com o valor 200', async () => {

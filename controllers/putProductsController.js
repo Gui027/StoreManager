@@ -1,10 +1,10 @@
-const updateProductService = require('../services/putProductsService');
+const { putProductsService } = require('../services/Services');
 
 const updateProduct = async (req, res) => {
     const { id } = req.params;
     const { name, quantity } = req.body;
 
-    const product = await updateProductService(id, name, quantity);
+    const product = await putProductsService(id, name, quantity);
 
     if (product.message) {
         return res.status(product.code).json({ message: product.message });

@@ -1,4 +1,4 @@
-const deleteProductService = require('../services/deleteProductService');
+const { deleteProductService } = require('../services/Services');
 
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
