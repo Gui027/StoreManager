@@ -2,9 +2,9 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 
 const productsMock = require('../../mocks/productsMock');
-const ProductController = require('../../../controllers/getProductController');
+const ProductController = require('../../../controllers/Controllers');
 const CreateController = require('../../../controllers/postProductsController');
-const ProductsService = require('../../../services/getProductsService');
+const ProductsService = require('../../../services/Services');
 const CreateService = require('../../../services/postProductService');
 const DeleteProducts = require('../../../services/deleteProductService');
 const DeleteProductsController = require('../../../controllers/deleteProductController');
@@ -66,8 +66,6 @@ describe('Controller', () => {
             });
     });
 
-    
-
     describe('#create', () => {
         const req = {};
         const res = {};
@@ -79,20 +77,20 @@ describe('Controller', () => {
             res.status = sinon.stub().returns(res);
             res.json = sinon.stub();
 
-            sinon.stub(CreateService, 'alreadyExist').resolves(productsMock.inserted);
+            sinon.stub(ProductsService, 'postProductService').resolves(productsMock.inserted);
         });
 
         after(() => {
-            CreateService.alreadyExist.restore();
+            ProductsService.postProductService.restore();
         })
 
         it('deve chamar `res.status` com o valor 201', async () => {
-            await CreateController.postProduct(req, res);
+            await ProductController.postProductsController(req, res);
             expect(res.status.calledWith(201)).to.be.true;
         });
 
         it('deve chamar `res.json` com o objeto cadastrado', async () => {
-            await CreateController.postProduct(req, res);
+            await ProductController.postProductsController(req, res);
             expect(res.status.calledWith(productsMock.inserted)).to.be.true;
         })
     });
@@ -111,14 +109,14 @@ describe('Controller', () => {
           res.json = sinon.stub();
 
           sinon.stub(ProductsService, 'getByIdProducts').resolves(false);
-          sinon.stub(DeleteProducts, 'deleteProductById').resolves();
+          sinon.stub(DeleteProducts, 'deleteProductController').resolves();
 
           await DeleteProductsController.deleteProduct(req, res);
 
           expect(res.status.calledWith(404)).to.be.true;
           expect(res.json.calledWith({ message: 'Product not found' })).to.be.true;
 
-          DeleteProducts.deleteProductById.restore();
+          DeleteProducts.deleteProductController.restore();
           ProductsService.getByIdProducts.restore();
 
         })
@@ -133,15 +131,15 @@ describe('Controller', () => {
           res.end = sinon.stub();
 
           sinon.stub(ProductsService, 'getByIdProducts').resolves(true);
-          sinon.stub(DeleteProducts, 'deleteProductById').resolves();
+          sinon.stub(ProductController, 'deleteProductController').resolves();
 
-          await DeleteProductsController.deleteProduct(req, res);
+          await ProductController.deleteProductController(req, res);
 
           expect(res.status.calledWith(204)).to.be.true;
           expect(res.end.called).to.be.true;
 
-          DeleteProducts.deleteProductById.restore();
-          ProductsService.getById.restore();
+          ProductController.deleteProductController.restore();
+          ProductsService.getByIdProducts.restore();
 
         })
       })
