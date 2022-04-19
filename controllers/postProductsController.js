@@ -1,9 +1,9 @@
-const { postProductService } = require('../services/Services');
+const Services = require('../services/Services');
 
 const postProduct = async (req, res) => {
     const { name, quantity } = req.body;
 
-    const product = await postProductService.alreadyExist(name, quantity);
+    const product = await Services.postProductService(name, quantity);
 
     if (product.message) {
         return res.status(product.code).json({ message: product.message });

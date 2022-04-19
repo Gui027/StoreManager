@@ -1,8 +1,8 @@
-const { deleteSalesService } = require('../services/Services');
+const Services = require('../services/Services');
 
 const deleteSales = async (req, res) => {
   const { id } = req.params;
-  const sales = await deleteSalesService(id);
+  const sales = await Services.deleteSalesService(id);
 
   if (sales.message) {
     return res.status(404).json({ message: sales.message });

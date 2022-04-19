@@ -21,4 +21,4 @@ const validateProduct = async (item) => {
     return reqProducts;
 };
 
-module.exports = { validateProduct };
+module.exports = validateProduct;

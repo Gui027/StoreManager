@@ -1,8 +1,8 @@
-const { validateProductService } = require('../services/Services');
+const Services = require('../services/Services');
 
 const postProduct = async (req, res, next) => {
         const arrayItems = req.body;
-        const products = arrayItems.map((item) => validateProductService(item));
+        const products = arrayItems.map((item) => Services.validateProduct(item));
          await Promise.all(products);
         console.log('products', products);
     
