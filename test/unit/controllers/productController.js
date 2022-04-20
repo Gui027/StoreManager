@@ -3,11 +3,8 @@ const sinon = require('sinon');
 
 const productsMock = require('../../mocks/productsMock');
 const ProductController = require('../../../controllers/Controllers');
-const CreateController = require('../../../controllers/postProductsController');
 const ProductsService = require('../../../services/Services');
-const CreateService = require('../../../services/postProductService');
-const DeleteProducts = require('../../../services/deleteProductService');
-const DeleteProductsController = require('../../../controllers/deleteProductController');
+
 
 describe('Controller', () => {
   describe('ProductController', () => {
@@ -91,58 +88,60 @@ describe('Controller', () => {
 
         it('deve chamar `res.json` com o objeto cadastrado', async () => {
             await ProductController.postProductsController(req, res);
-            expect(res.status.calledWith(productsMock.inserted)).to.be.true;
+            expect(res.json.calledWith(productsMock.inserted)).to.be.true;
         })
     });
 
-    describe('#deleteProducts', () => {
+    describe('#delete', () => {
 
-      const req = {};
-      const res = {};
-
-      describe('Quando nao for deletado o produto', () => {
-        it('deve chamar res.status = 404 valor Product not found', async () => {
-
-          req.params = { id: 25 };
-
-          res.status = sinon.stub().returns(res);
-          res.json = sinon.stub();
-
-          sinon.stub(ProductsService, 'getByIdProducts').resolves(false);
-          sinon.stub(DeleteProducts, 'deleteProductController').resolves();
-
-          await DeleteProductsController.deleteProduct(req, res);
-
-          expect(res.status.calledWith(404)).to.be.true;
-          expect(res.json.calledWith({ message: 'Product not found' })).to.be.true;
-
-          DeleteProducts.deleteProductController.restore();
-          ProductsService.getByIdProducts.restore();
-
+      describe('product was deleted', () => {
+        const response = {};
+        const request = { 
+          params: { id: 1 },
+        };
+        before(() => {
+          response.status = sinon.stub().returns(response);
+          response.json = sinon.stub().returns();
+            response.end = sinon.stub().returns();
+          sinon.stub(ProductsService, 'deleteProductService').resolves(productsMock.inserted);
         })
-      })
+  
+        after(() => ProductsService.deleteProductService.restore());
+  
+        it('return status 204', async () => {
+          await ProductController.deleteProductController(request, response);
+          expect(response.status.calledWith(204)).to.be.equal(true)
+        });
+      });
+    })
 
-      describe('Quando for deletado o produto', () => {
-        it('deve chamar res.status = 204', async () => {
+    describe('#update', () => {
+        describe('product was updated', () => {
+            
+            const response = {};
+            const request = { 
+              body: productsMock.novoProduto,
+              params: { id: 1 },
+            };
 
-          req.params = { id: 1 };
+            before(() => {
+              response.status = sinon.stub().returns(response);
+              response.json = sinon.stub().returns();
+              sinon.stub(ProductsService, 'putProductsService').resolves(productsMock.inserted)
+            })
+      
+            after(() => ProductsService.putProductsService.restore());
+      
+            it('return status 200', async () => {
+              await ProductController.putProductsController(request, response);
+              expect(response.status.calledWith(200)).to.be.equal(true)
+            });
 
-          res.status = sinon.stub().returns(res);
-          res.end = sinon.stub();
-
-          sinon.stub(ProductsService, 'getByIdProducts').resolves(true);
-          sinon.stub(ProductController, 'deleteProductController').resolves();
-
-          await ProductController.deleteProductController(req, res);
-
-          expect(res.status.calledWith(204)).to.be.true;
-          expect(res.end.called).to.be.true;
-
-          ProductController.deleteProductController.restore();
-          ProductsService.getByIdProducts.restore();
-
-        })
-      })
+            it('return json with product', async () => {
+              await ProductController.putProductsController(request, response);
+              expect(response.json.calledWith(productsMock.inserted)).to.be.equal(true)
+            });
+          });
     })
   });
 });

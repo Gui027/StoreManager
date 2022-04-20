@@ -85,14 +85,6 @@ describe('Testa funções de "sales" da camada "Model"', () => {
         connection.query.restore();
       });
   
-      describe('Quando tenta buscar todas a vendas', () => {
-        it('É um array com 2 elementos', async () => {
-          const result = await getAllSalesModel();
-          expect(result).to.be.an('array');
-          expect(result.length).to.be.equals(2);
-        });
-      });
-  
       describe('Quando tenta buscar vendas pelo id', () => {
         it('É um array com 1 elemento', async () => {
           const result = await getAllSalesModel(1);

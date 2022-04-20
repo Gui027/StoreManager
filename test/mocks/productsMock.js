@@ -22,5 +22,10 @@ module.exports = {
         "id": 1,
         "name": "produto A",
         "quantity": 20
+    },
+
+    novoProduto: {
+        "name": "produto A",
+        "quantity": 10
     }
 }

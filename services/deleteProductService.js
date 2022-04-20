@@ -1,15 +1,19 @@
-const { deleteProduct } = require('../models/ProductModel');
-const { getByIdProducts } = require('./getProductsService');
+const Model = require('../models/ProductModel');
+const Services = require('./getProductsService');
 
 const deleteProductById = async (id) => {
-  const product = await getByIdProducts(id);
-
-  if (product.message) {
+  console.log('services', Services);
+  if (id) {
+    const product = await Services.getByIdProducts(id);
+  
+    if (product.message) {
+      return product;
+    }
+  
+    await Model.deleteProduct(id);
+    console.log(product);
     return product;
   }
-
-  await deleteProduct(id);
-  return product;
 };
 
 module.exports = deleteProductById;

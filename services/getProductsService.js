@@ -6,8 +6,8 @@ const getAllProducts = async () => {
 };
 
 const getByIdProducts = async (id) => {
-    const products = await ProductsModel.getAll();
-    const product = products.find((p) => p.id === parseInt(id, 10));
+    console.log('id é valido?', id);
+    const product = await ProductsModel.getById({ id });
 
     if (!product) {
         return {

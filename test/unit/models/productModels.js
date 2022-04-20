@@ -15,22 +15,8 @@ const connection = require('../../../models/connection');
 describe('Models', () => {
     describe('productModel', () => {
         describe('#getAll', () => {
-            describe('Quando a tabela `products` não tiver dados!', () => {
-                before(() => {
-                    sinon.stub(connection, 'execute').resolves([productsMock.empty]);
-                });
-
-                after(() => {
-                    connection.execute.restore();
-                })
-
-                it('retornar uma array vazia', async () => {
-                    const products = await productModel.getAll();
-                    expect(products).to.be.deep.eq([productsMock.empty]);
-                })
-            });
-
-            describe('Quando a tabela `products` tiver dados!', () => {
+            
+          describe('Quando a tabela `products` tiver dados!', () => {
                 before(() => {
                     sinon.stub(connection, 'execute').resolves([productsMock.full])
                 });

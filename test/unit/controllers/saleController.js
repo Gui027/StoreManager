@@ -1,8 +1,8 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const GetSaleController = require('../../../controllers/getSalesController');
-const GetSaleService = require('../../../services/getSalesServices');
+const Controller = require('../../../controllers/Controllers');
+const Services = require('../../../services/Services');
 
 describe('Sale Controller', () => {
   const fakeProductSold = [
@@ -43,17 +43,17 @@ describe('Sale Controller', () => {
 
   describe('create sales', () => {
     before(() => {
-      sinon.stub(SaleService, 'createSale').resolves(fakeSale);
+      sinon.stub(Services, 'postSalesService').resolves(fakeSale);
       req.body = fakeProductSold;
     })
 
     after(() => {
-      SaleService.createSale.restore();
+      Services.postSalesService.restore();
       req.body = undefined;
     })
 
     it('verifica criação de venda com sucesso', async () => {
-      await SaleController.createSale(req, res);
+      await Controller.postSalesController(req, res);
 
       expect(res.status.calledWith(201)).to.be.equals(true)
       expect(res.json.calledWith(fakeSale)).to.be.equals(true);
@@ -61,13 +61,13 @@ describe('Sale Controller', () => {
   })
   describe('verifica requisição de busca para todas as vendas', () => {
     before(() => {
-      sinon.stub(GetSaleService, 'getAllSales').resolves(getAllSales);
+      sinon.stub(Services, 'getAllSales').resolves(getAllSales);
     })
     after(() => {
-        GetSaleService.getAllSales.restore();
+      Services.getAllSales.restore();
     })
     it('retorna vendas', async () => {
-      await GetSaleController.getAllS(req, res);
+      await Controller.getAllS(req, res);
 
       expect(res.status.calledWith(201)).to.be.equal(true);
       expect(res.json.calledWith(getAllSales)).to.be.equal(true);
