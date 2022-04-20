@@ -3,7 +3,7 @@ const Services = require('../services/Services');
 const postSalesController = async (req, res) => {
     try {
         const sales = req.body;
-        console.log('sales', sales);
+
         const postSales = await Services.postSalesService(sales);
     
         return res.status(201).json(postSales);

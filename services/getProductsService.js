@@ -6,7 +6,6 @@ const getAllProducts = async () => {
 };
 
 const getByIdProducts = async (id) => {
-    console.log('id é valido?', id);
     const product = await ProductsModel.getById({ id });
 
     if (!product) {
