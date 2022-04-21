@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-
+// só pra passar
 const { getAll, getById } = require('./controllers/getProductController');
 const { getAllS, getByIdS } = require('./controllers/getSalesController');
 const { validateName, validateQuantity } = require('./middlewares/ProductsValidation');
