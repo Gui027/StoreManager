@@ -38,42 +38,30 @@ describe('Services', () => {
                     expect(products).to.deep.eq(productsMock.full);
                 });
             });
-    });
+    })
 
-    // describe('#create', () => {
-    //       before(() => {
-    //         sinon.stub(ProductModel, 'createProduct').resolves(productsMock.inserted);
-    //         sinon.stub(ProductModel, 'getAll').resolves(productsMock.inserted);
-    //       })
+    describe('#create', () => {
+      describe('produto criado com sucesso', () => {
+        before(() => {
+          sinon.stub(ProductModel, 'createProduct').resolves(productsMock.novoProduto)
+          sinon.stub(ProductModel, 'getAll').resolves(productsMock.full)
+          
+        });
+        after(() => {
+          ProductModel.createProduct.restore();
+          ProductModel.getAll.restore();
+        });
 
-    //       after(() => {
-    //         ProductModel.createProduct.restore();
-    //         ProductModel.getAll.restore();
-    //       })
+        it('valida criação de produto', async () => {
+          const result = await ProductsService.postProductService(productsMock.novoProduto);
 
-    //       it('deve retornar um objeto com os atributos id, name e quantity', async () => {
-    //         const { name, quantity } = productsMock.inserted;
-    //         const product = await ProductsService.postProductService({ name, quantity });
-    //         expect(product).to.deep.eq(productsMock.inserted);
-    //       })
-    // })
+          expect(result.name).to.be.equals('produto A');
+          expect(result.quantity).to.be.equals(10);
+        })
+        });
+    })
 
     describe('#deleteProducts', () => {
-          // describe('Quando deleta um produto', () => {
-          //   it('não retorna nada', async () => {
-    
-          //     const idDeleted = 1;
-    
-          //     sinon.stub(ProductModel, 'deleteProduct').resolves()
-    
-          //     const products = await ProductsService.deleteProductService(idDeleted);
-          //     expect(products).to.deep.eq(undefined);
-    
-          //     ProductModel.deleteProduct.restore();
-    
-          //   })
-          // })
-          
           describe('A função de Deletar', () => {
             before(() => {
               sinon.stub(ProductModel, 'deleteProduct').resolves(1);
@@ -91,7 +79,6 @@ describe('Services', () => {
             });
           });
     });
+    
   });
 });
-
-//testando

@@ -5,16 +5,10 @@ const sinon = require('sinon');
 const productsMock = require('../../mocks/productsMock');
 const productModel = require('../../../models/ProductModel');
 const connection = require('../../../models/connection');
-// const {
-//     createProduct,
-//     getAll,
-//     putProduct,
-//     deleteProduct,
-// } = require('../../../models/ProductModel');
 
 describe('Models', () => {
     describe('productModel', () => {
-        describe('#getAll', () => {
+        describe('#ALL', () => {
             
           describe('Quando a tabela `products` tiver dados!', () => {
                 before(() => {

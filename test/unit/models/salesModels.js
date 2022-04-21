@@ -10,8 +10,8 @@ const {
     updateSalesModel
 } = require('../../../models/SalesModel');
 
-describe('Testa funções de "sales" da camada "Model"', () => {
-    const SALE_PRODUCTS = [
+describe('Testando "sales" da "Model"', () => {
+    const PRODUCTS_SALE = [
       {
         product_id: 1,
         quantity: 20,
@@ -22,7 +22,7 @@ describe('Testa funções de "sales" da camada "Model"', () => {
       },
     ];
   
-    describe('Testa o arquivo postSalesModel', () => {
+    describe('Testando o arquivo de criar venda', () => {
       describe('Quando tenta criar uma nova venda', () => {
         before(() => {
           sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
@@ -35,23 +35,23 @@ describe('Testa funções de "sales" da camada "Model"', () => {
         });
   
         it('É um objeto', async () => {
-          const result = await createSalesModel(SALE_PRODUCTS);
+          const result = await createSalesModel(PRODUCTS_SALE);
           expect(result).to.be.an('object');
         });
   
-        it('Contém chave "id" igual a 1', async () => {
-          const result = await createSalesModel(SALE_PRODUCTS);
+        it('Tem chave "id" igual a 1', async () => {
+          const result = await createSalesModel(PRODUCTS_SALE);
           expect(result.id).to.be.equals(1);
         });
   
-        it('Contém chave "itemsSold" igual ao parametro passado', async () => {
-          const result = await createSalesModel(SALE_PRODUCTS);
-          expect(result.itemsSold).to.be.equals(SALE_PRODUCTS);
+        it('Tem chave "itemsSold" igual ao parametro passado', async () => {
+          const result = await createSalesModel(PRODUCTS_SALE);
+          expect(result.itemsSold).to.be.equals(PRODUCTS_SALE);
         });
       });
     });
-    describe('Testa o arquivo getAllSalesModel', () => {
-      const ALL_SALES = [[
+    describe('Testando o arquivo De Buscar VEndas', () => {
+      const ALL_S = [[
         {
           "saleId": 1,
           "date": "2022-01-30T23:31:12.000Z",
@@ -66,7 +66,7 @@ describe('Testa funções de "sales" da camada "Model"', () => {
         },
       ]];
   
-      const SALE_BY_ID = [[
+      const SALE_ID = [[
         {
           "saleId": 1,
           "date": "2022-01-30T23:31:12.000Z",
@@ -76,8 +76,8 @@ describe('Testa funções de "sales" da camada "Model"', () => {
       ]];
   
       before(() => {
-        sinon.stub(connection, 'query').resolves(ALL_SALES);
-        sinon.stub(connection, 'execute').resolves(SALE_BY_ID);
+        sinon.stub(connection, 'query').resolves(ALL_S);
+        sinon.stub(connection, 'execute').resolves(SALE_ID);
       });
   
       after(() => {
