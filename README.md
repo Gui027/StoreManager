@@ -1,16 +1,37 @@
-# 🚧 README em construção 🚧
+# Projeto Store Manager
 
-<!-- Olá, Tryber!
+# Contexto
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
+Desenvolvimento de API utilizando a arquitetura MSC.
 
-É essencial que você preencha esse documento por conta própria, ok?
+A API construída trata-se de um sistema de gerenciamento de vendas, onde será possível criar, visualizar, deletar e atualizar produtos e vendas.
 
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
+## Técnologias usadas
 
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
+Back-end:
+> Desenvolvido usando: NodeJS, ExpressJS, MYSQL, ES6, Docker
 
--->
+
+## Instalando Dependências
+
+> Backend
+```bash
+cd api/ 
+npm install
+``` 
+
+## Executando aplicação
+
+* Para rodar o back-end:
+
+  ```
+  cd api/ && npm start
+  ```
+
+## Executando Testes
+
+* Para rodar todos os testes:
+
+  ```
+    npm test
+  ```
